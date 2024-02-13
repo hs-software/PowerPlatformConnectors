@@ -228,11 +228,11 @@ Will either create a new OtherDossier or update an existing one based on it's Ex
 
 #### Get OtherDossier's Incoming Invoices (by Internal Id)
 
-### Get OtherDossier's Offers (by Internal Id)
+#### Get OtherDossier's Offers (by Internal Id)
 
-### Get OtherDossier's Orders (by Internal Id)
+#### Get OtherDossier's Orders (by Internal Id)
 
-### Get OtherDossier's OrdersConfirmations (by Internal Id)
+#### Get OtherDossier's OrdersConfirmations (by Internal Id)
 
 #### Get OtherDossier's Protocols (by Internal Id)
 
