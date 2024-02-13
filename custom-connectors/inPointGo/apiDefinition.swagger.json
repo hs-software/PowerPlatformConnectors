@@ -1,0 +1,3973 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.3.1",
+    "title": "inPoint.Go API",
+    "description": "inPoint.Go ODATA API connector for managing Dossiers",
+    "contact": {
+      "name": "H&S Support",
+      "url": "https://www.hs-soft.com",
+      "email": "support@hs-soft.com"
+    }
+  },
+  "host": "www.hs-soft.com",
+  "basePath": "/goapi",
+  "schemes": ["https"],
+  "consumes": ["multipart/form-data", "application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/Companies/$metadata": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Company metadata",
+        "description": "Get Company metadata (lookup values)",
+        "operationId": "GetCompanyMetadata",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies/$contentTypes": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Company ContentTypes",
+        "description": "Get Companies allowed contentTypes",
+        "operationId": "GetCompanyContentTypes",
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": ["Document", "Folder"]
+          },
+          {
+            "name": "returnIds",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies": {
+      "get": {
+        "summary": "Get All Companies",
+        "description": "Get All Companies",
+        "operationId": "GetAllCompanies",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Company",
+        "description": "Create Company",
+        "operationId": "CreateCompany",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Company External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "CompanyName": {
+                  "type": "string",
+                  "description": "Company Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "CompanyType": {
+                  "type": "string",
+                  "description": "Company Type",
+                  "x-ms-summary": "Type",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_type"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_type"
+                      }
+                    }
+                  }
+                },
+                "CompanyStatus": {
+                  "type": "string",
+                  "description": "Current Company Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_status"
+                      }
+                    }
+                  }
+                },
+                "CompanyStreet": {
+                  "type": "string",
+                  "description": "Company Street",
+                  "x-ms-summary": "Street",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyCity": {
+                  "type": "string",
+                  "description": "Company City",
+                  "x-ms-summary": "City",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyZip": {
+                  "type": "string",
+                  "description": "Company Zipcode",
+                  "x-ms-summary": "Zipcode",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyCountry": {
+                  "type": "string",
+                  "description": "Company Country",
+                  "x-ms-summary": "Country",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_country"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_country"
+                      }
+                    }
+                  }
+                },
+                "CompanyUid": {
+                  "type": "string",
+                  "description": "Company Uid Number",
+                  "x-ms-summary": "Uid Nr.",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyDomain": {
+                  "type": "string",
+                  "description": "Company Domain",
+                  "x-ms-summary": "Domain",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanySupervisor": {
+                  "type": "string",
+                  "description": "Company Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_supervisor"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["ExternalId", "CompanyName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')": {
+      "get": {
+        "summary": "Get Company",
+        "description": "Get Company",
+        "operationId": "GetCompany",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Company",
+        "description": "Update Company properties",
+        "operationId": "PatchCompany",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Version",
+                  "x-ms-summary": "Version",
+                  "x-ms-visibility": "important"
+                },
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Company External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "CompanyName": {
+                  "type": "string",
+                  "description": "Company Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "CompanyType": {
+                  "type": "string",
+                  "description": "Company Type",
+                  "x-ms-summary": "Type",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_type"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_type"
+                      }
+                    }
+                  }
+                },
+                "CompanyStatus": {
+                  "type": "string",
+                  "description": "Current Company Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_status"
+                      }
+                    }
+                  }
+                },
+                "CompanyStreet": {
+                  "type": "string",
+                  "description": "Company Street",
+                  "x-ms-summary": "Street",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyCity": {
+                  "type": "string",
+                  "description": "Company City",
+                  "x-ms-summary": "City",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyZip": {
+                  "type": "string",
+                  "description": "Company Zipcode",
+                  "x-ms-summary": "Zipcode",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyCountry": {
+                  "type": "string",
+                  "description": "Company Country",
+                  "x-ms-summary": "Country",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_country"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_country"
+                      }
+                    }
+                  }
+                },
+                "CompanyUid": {
+                  "type": "string",
+                  "description": "Company Uid Number",
+                  "x-ms-summary": "Uid Nr.",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyDomain": {
+                  "type": "string",
+                  "description": "Company Domain",
+                  "x-ms-summary": "Domain",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanySupervisor": {
+                  "type": "string",
+                  "description": "Company Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_supervisor"
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "Version": 1
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies(extid='{companyExternalId}')": {
+      "get": {
+        "summary": "Get Company by External Id",
+        "description": "Get Company by External Id",
+        "operationId": "GetCompanyByExternalId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyExternalId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert Company by External Id",
+        "description": "Create/Update Company by External Id",
+        "operationId": "UpsertCompanyByExternalId",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "companyExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Company External Id (reference from Master source data)",
+            "x-ms-summary": "Company External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Company External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "CompanyName": {
+                  "type": "string",
+                  "description": "Company Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "CompanyType": {
+                  "type": "string",
+                  "description": "Company Type",
+                  "x-ms-summary": "Type",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_type"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_type"
+                      }
+                    }
+                  }
+                },
+                "CompanyStatus": {
+                  "type": "string",
+                  "description": "Current Company Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_status"
+                      }
+                    }
+                  }
+                },
+                "CompanyStreet": {
+                  "type": "string",
+                  "description": "Company Street",
+                  "x-ms-summary": "Street",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyCity": {
+                  "type": "string",
+                  "description": "Company City",
+                  "x-ms-summary": "City",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyZip": {
+                  "type": "string",
+                  "description": "Company Zipcode",
+                  "x-ms-summary": "Zipcode",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyCountry": {
+                  "type": "string",
+                  "description": "Company Country",
+                  "x-ms-summary": "Country",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_country"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_country"
+                      }
+                    }
+                  }
+                },
+                "CompanyUid": {
+                  "type": "string",
+                  "description": "Company Uid Number",
+                  "x-ms-summary": "Uid Nr.",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyDomain": {
+                  "type": "string",
+                  "description": "Company Domain",
+                  "x-ms-summary": "Domain",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanySupervisor": {
+                  "type": "string",
+                  "description": "Company Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetCompanyMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "company_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetCompanyMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "company_supervisor"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["ExternalId", "CompanyName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/Documents": {
+      "get": {
+        "summary": "Get All Company's documents",
+        "description": "Get All Company's documents",
+        "operationId": "GetCompanyDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/GeneralDocuments": {
+      "get": {
+        "summary": "Get Company's GeneralDocuments",
+        "description": "Get Company's GeneralDocuments",
+        "operationId": "GetCompanyGeneralDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/Messages": {
+      "get": {
+        "summary": "Get Company's Messages",
+        "description": "Get Company's Messages",
+        "operationId": "GetCompanyMessages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/OutgoingInvoices": {
+      "get": {
+        "summary": "Get Company's Outgoing Invoices",
+        "description": "Get Company's Outgoing Invoices",
+        "operationId": "GetCompanyOutgoingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/IncomingInvoices": {
+      "get": {
+        "summary": "Get Company's Incoming Invoices",
+        "description": "Get Company's Incoming Invoices",
+        "operationId": "GetCompanyIncomingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/Protocols": {
+      "get": {
+        "summary": "Get Company's Protocols",
+        "description": "Get Company's Protocols",
+        "operationId": "GetCompanyProtocols",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Company",
+        "description": "Upload Document to Company",
+        "operationId": "UploadDocumentToCompany",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Company Internal Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetCompanyContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetCompanyContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies(extid='{companyExternalId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Company by External Id",
+        "description": "Upload Document to Company by External Id",
+        "operationId": "UploadDocumentToCompanyByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "companyExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Company External Id (reference from Master source data)",
+            "x-ms-summary": "Company External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetCompanyContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetCompanyContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies(extid='{companyExternalId}')/GeneralDocument/Upload": {
+      "post": {
+        "summary": "Upload GeneralDocument to Company by External Id",
+        "description": "Upload Document to Company by External Id",
+        "operationId": "UploadGeneralDocumentToCompanyByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "companyExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Company External Id (reference from Master source data)",
+            "x-ms-summary": "Company External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "internal",
+            "required": true,
+            "default": "CompanyGeneralDocument"
+          },
+          {
+            "name": "Direction",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's direction",
+            "x-ms-summary": "Direction",
+            "x-ms-visibility": "advanced",
+            "default": "Eingang",
+            "enum": ["Eingang", "Ausgang"]
+          },
+          {
+            "name": "Remarks",
+            "in": "formData",
+            "type": "string",
+            "description": "Remarks",
+            "x-ms-summary": "Remarks",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies/Upload": {
+      "post": {
+        "summary": "Upload Document to Companies pool",
+        "description": "Upload Document to Companies pool",
+        "operationId": "UploadDocumentToCompanyPool",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetCompanyContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetCompanyContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts/$metadata": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Contact metadata",
+        "description": "Get Contact metadata (lookup values)",
+        "operationId": "GetContactMetadata",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts/$contentTypes": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Contact ContentTypes",
+        "description": "Get Contacts allowed contentTypes",
+        "operationId": "GetContactContentTypes",
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": ["Document", "Folder"]
+          },
+          {
+            "name": "returnIds",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts": {
+      "get": {
+        "summary": "Get All Contacts",
+        "description": "Get All Contacts",
+        "operationId": "GetAllContacts",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Contact",
+        "description": "Create Contact",
+        "operationId": "CreateContact",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Contact External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "ContactName": {
+                  "type": "string",
+                  "description": "Contact Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "ContactFirstName": {
+                  "type": "string",
+                  "description": "Contact First Name",
+                  "x-ms-summary": "First Name",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactLastName": {
+                  "type": "string",
+                  "description": "Contact Last Name",
+                  "x-ms-summary": "Last Name",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactPrefix": {
+                  "type": "string",
+                  "description": "Contact Prefix",
+                  "x-ms-summary": "Prefix",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_prefix"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_prefix"
+                      }
+                    }
+                  }
+                },
+                "ContactPhone": {
+                  "type": "string",
+                  "description": "Contact Phone",
+                  "x-ms-summary": "Phone",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactMobile": {
+                  "type": "string",
+                  "description": "Contact Mobile",
+                  "x-ms-summary": "Mobile",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactEmail": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Contact E-Mail",
+                  "x-ms-summary": "E-Mail",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactAddress": {
+                  "type": "string",
+                  "description": "Contact Address",
+                  "x-ms-summary": "Address",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactZip": {
+                  "type": "string",
+                  "description": "Contact Zipcode",
+                  "x-ms-summary": "Zipcode",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactCity": {
+                  "type": "string",
+                  "description": "Contact City",
+                  "x-ms-summary": "City",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactCountry": {
+                  "type": "string",
+                  "description": "Contact Country",
+                  "x-ms-summary": "Country",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_country"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_country"
+                      }
+                    }
+                  }
+                },
+                "ContactStatus": {
+                  "type": "string",
+                  "description": "Current Contact Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_status"
+                      }
+                    }
+                  }
+                },
+                "ContactCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contact Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_company"
+                      }
+                    }
+                  }
+                },
+                "ContactFunction": {
+                  "type": "string",
+                  "description": "Contact Function",
+                  "x-ms-summary": "Function",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactSupervisor": {
+                  "type": "string",
+                  "description": "Contact Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_supervisor"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["ExternalId", "ContactName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts('{contactId}')": {
+      "get": {
+        "summary": "Get Contact",
+        "description": "Get Contact",
+        "operationId": "GetContact",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contactId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Contact",
+        "description": "Update Contact properties",
+        "operationId": "PatchContact",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Version",
+                  "x-ms-summary": "Version",
+                  "x-ms-visibility": "important"
+                },
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Contact External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "ContactName": {
+                  "type": "string",
+                  "description": "Contact Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "ContactFirstName": {
+                  "type": "string",
+                  "description": "Contact First Name",
+                  "x-ms-summary": "First Name",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactLastName": {
+                  "type": "string",
+                  "description": "Contact Last Name",
+                  "x-ms-summary": "Last Name",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactPrefix": {
+                  "type": "string",
+                  "description": "Contact Prefix",
+                  "x-ms-summary": "Prefix",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_prefix"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_prefix"
+                      }
+                    }
+                  }
+                },
+                "ContactPhone": {
+                  "type": "string",
+                  "description": "Contact Phone",
+                  "x-ms-summary": "Phone",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactMobile": {
+                  "type": "string",
+                  "description": "Contact Mobile",
+                  "x-ms-summary": "Mobile",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactEmail": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Contact E-Mail",
+                  "x-ms-summary": "E-Mail",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactAddress": {
+                  "type": "string",
+                  "description": "Contact Address",
+                  "x-ms-summary": "Address",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactZip": {
+                  "type": "string",
+                  "description": "Contact Zipcode",
+                  "x-ms-summary": "Zipcode",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactCity": {
+                  "type": "string",
+                  "description": "Contact City",
+                  "x-ms-summary": "City",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactCountry": {
+                  "type": "string",
+                  "description": "Contact Country",
+                  "x-ms-summary": "Country",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_country"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_country"
+                      }
+                    }
+                  }
+                },
+                "ContactStatus": {
+                  "type": "string",
+                  "description": "Current Contact Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_status"
+                      }
+                    }
+                  }
+                },
+                "ContactCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contact Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_company"
+                      }
+                    }
+                  }
+                },
+                "ContactFunction": {
+                  "type": "string",
+                  "description": "Contact Function",
+                  "x-ms-summary": "Function",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactSupervisor": {
+                  "type": "string",
+                  "description": "Contact Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_supervisor"
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "Version": 1
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts(extid='{contactExternalId}')": {
+      "get": {
+        "summary": "Get Contact by External Id",
+        "description": "Get Contact by External Id",
+        "operationId": "GetContactByExternalId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contactExternalId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert Contact by External Id",
+        "description": "Create/Update Contact by External Id",
+        "operationId": "UpsertContactByExternalId",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "contactExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Contact External Id (reference from Master source data)",
+            "x-ms-summary": "Contact External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Company External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "ContactName": {
+                  "type": "string",
+                  "description": "Contact Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "ContactFirstName": {
+                  "type": "string",
+                  "description": "Contact First Name",
+                  "x-ms-summary": "First Name",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactLastName": {
+                  "type": "string",
+                  "description": "Contact Last Name",
+                  "x-ms-summary": "Last Name",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactPrefix": {
+                  "type": "string",
+                  "description": "Contact Prefix",
+                  "x-ms-summary": "Prefix",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_prefix"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_prefix"
+                      }
+                    }
+                  }
+                },
+                "ContactPhone": {
+                  "type": "string",
+                  "description": "Contact Phone",
+                  "x-ms-summary": "Phone",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactMobile": {
+                  "type": "string",
+                  "description": "Contact Mobile",
+                  "x-ms-summary": "Mobile",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactEmail": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Contact E-Mail",
+                  "x-ms-summary": "E-Mail",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactAddress": {
+                  "type": "string",
+                  "description": "Contact Address",
+                  "x-ms-summary": "Address",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactZip": {
+                  "type": "string",
+                  "description": "Contact Zipcode",
+                  "x-ms-summary": "Zipcode",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactCity": {
+                  "type": "string",
+                  "description": "Contact City",
+                  "x-ms-summary": "City",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactCountry": {
+                  "type": "string",
+                  "description": "Contact Country",
+                  "x-ms-summary": "Country",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_country"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_country"
+                      }
+                    }
+                  }
+                },
+                "ContactStatus": {
+                  "type": "string",
+                  "description": "Current Contact Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_status"
+                      }
+                    }
+                  }
+                },
+                "ContactCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contact Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemTitlePath": "text",
+                    "itemValuePath": "key",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_company"
+                      }
+                    }
+                  }
+                },
+                "ContactFunction": {
+                  "type": "string",
+                  "description": "Contact Function",
+                  "x-ms-summary": "Function",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContactSupervisor": {
+                  "type": "string",
+                  "description": "Contact Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContactMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contact_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContactMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contact_supervisor"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["ExternalId", "ContactName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts('{contactId}')/Documents": {
+      "get": {
+        "summary": "Get All Contact's documents",
+        "description": "Get All Contact's documents",
+        "operationId": "GetContactDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contactId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts('{contactId}')/GeneralDocuments": {
+      "get": {
+        "summary": "Get Contact's GeneralDocuments",
+        "description": "Get Contact's GeneralDocuments",
+        "operationId": "GetContactGeneralDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contactId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts('{contactId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Contact",
+        "description": "Upload Document to Contact",
+        "operationId": "UploadDocumentToContact",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Contact Internal Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetContactContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetContactContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts(extid='{contactExternalId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Contact by External Id",
+        "description": "Upload Document to Contact by External Id",
+        "operationId": "UploadDocumentToContactByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "contactExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Contact External Id (reference from Master source data)",
+            "x-ms-summary": "Contact External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetContactContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetContactContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contacts(extid='{contactExternalId}')/GeneralDocument/Upload": {
+      "post": {
+        "summary": "Upload GeneralDocument to Contact by External Id",
+        "description": "Upload Document to Contact by External Id",
+        "operationId": "UploadGeneralDocumentToContactByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "contactExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Contact External Id (reference from Master source data)",
+            "x-ms-summary": "Contact External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "internal",
+            "required": true,
+            "default": "CompanyGeneralDocument"
+          },
+          {
+            "name": "Direction",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's direction",
+            "x-ms-summary": "Direction",
+            "x-ms-visibility": "advanced",
+            "default": "Eingang",
+            "enum": ["Eingang", "Ausgang"]
+          },
+          {
+            "name": "Remarks",
+            "in": "formData",
+            "type": "string",
+            "description": "Remarks",
+            "x-ms-summary": "Remarks",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts/$metadata": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Contract metadata",
+        "description": "Get Contract metadata (lookup values)",
+        "operationId": "GetContractMetadata",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts/$contentTypes": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Contract ContentTypes",
+        "description": "Get Contracts allowed contentTypes",
+        "operationId": "GetContractContentTypes",
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": ["Document", "Folder"]
+          },
+          {
+            "name": "returnIds",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts": {
+      "get": {
+        "summary": "Get All Contracts",
+        "description": "Get All Contracts",
+        "operationId": "GetAllContracts",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Contract",
+        "description": "Create Contract",
+        "operationId": "CreateContract",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Contract External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "ContractName": {
+                  "type": "string",
+                  "description": "Contract Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "ContractDescription": {
+                  "type": "string",
+                  "description": "Contract Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractCategory": {
+                  "type": "string",
+                  "description": "Contract Category",
+                  "x-ms-summary": "Category",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_cat"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_cat"
+                      }
+                    }
+                  }
+                },
+                "ContractConclusion": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Conclusion",
+                  "x-ms-summary": "Conclusion",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractBegin": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Begin",
+                  "x-ms-summary": "Begin",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractEnd": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract End",
+                  "x-ms-summary": "End",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractUnlimited": {
+                  "type": "boolean",
+                  "description": "Contract Unlimited",
+                  "x-ms-summary": "Unlimited",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractMinDuration": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Min. Duration",
+                  "x-ms-summary": "Min. Duration",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contract Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_company"
+                      }
+                    }
+                  }
+                },
+                "ContractContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contract Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_contact"
+                      }
+                    }
+                  }
+                },
+                "ContractValidity": {
+                  "type": "string",
+                  "description": "Contract Validity",
+                  "x-ms-summary": "Validity",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_validity"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_validity"
+                      }
+                    }
+                  }
+                },
+                "ContractPaymentTarget": {
+                  "type": "number",
+                  "description": "Contract Payment target",
+                  "x-ms-summary": "Payment target",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractSupervisor": {
+                  "type": "string",
+                  "description": "Contract Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_supervisor"
+                      }
+                    }
+                  }
+                },
+                "ContractRemarks": {
+                  "type": "string",
+                  "description": "Contract Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractLinks": {
+                  "type": "string",
+                  "description": "Contract Links",
+                  "x-ms-summary": "Links",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_links"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_links"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["ExternalId", "ContractName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts('{contractId}')": {
+      "get": {
+        "summary": "Get Contract",
+        "description": "Get Contract",
+        "operationId": "GetContract",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contractId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Contract",
+        "description": "Update Contract properties",
+        "operationId": "PatchContract",
+        "parameters": [
+          {
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Version",
+                  "x-ms-summary": "Version",
+                  "x-ms-visibility": "important"
+                },
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Contract External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "ContractName": {
+                  "type": "string",
+                  "description": "Contract Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "ContractDescription": {
+                  "type": "string",
+                  "description": "Contract Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractCategory": {
+                  "type": "string",
+                  "description": "Contract Category",
+                  "x-ms-summary": "Category",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_cat"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_cat"
+                      }
+                    }
+                  }
+                },
+                "ContractConclusion": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Conclusion",
+                  "x-ms-summary": "Conclusion",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractBegin": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Begin",
+                  "x-ms-summary": "Begin",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractEnd": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract End",
+                  "x-ms-summary": "End",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractUnlimited": {
+                  "type": "boolean",
+                  "description": "Contract Unlimited",
+                  "x-ms-summary": "Unlimited",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractMinDuration": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Min. Duration",
+                  "x-ms-summary": "Min. Duration",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contract Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_company"
+                      }
+                    }
+                  }
+                },
+                "ContractContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contract Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_contact"
+                      }
+                    }
+                  }
+                },
+                "ContractValidity": {
+                  "type": "string",
+                  "description": "Contract Validity",
+                  "x-ms-summary": "Validity",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_validity"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_validity"
+                      }
+                    }
+                  }
+                },
+                "ContractPaymentTarget": {
+                  "type": "number",
+                  "description": "Contract Payment target",
+                  "x-ms-summary": "Payment target",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractSupervisor": {
+                  "type": "string",
+                  "description": "Contract Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_supervisor"
+                      }
+                    }
+                  }
+                },
+                "ContractRemarks": {
+                  "type": "string",
+                  "description": "Contract Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractLinks": {
+                  "type": "string",
+                  "description": "Contract Links",
+                  "x-ms-summary": "Links",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_links"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_links"
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "Version": 1
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts(extid='{contractExternalId}')": {
+      "get": {
+        "summary": "Get Contract by External Id",
+        "description": "Get Contract by External Id",
+        "operationId": "GetContractByExternalId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contractExternalId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert Contract by External Id",
+        "description": "Create/Update Contract by External Id",
+        "operationId": "UpsertContractByExternalId",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "contractExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Contract External Id (reference from Master source data)",
+            "x-ms-summary": "Contract External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Contract External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "ContractName": {
+                  "type": "string",
+                  "description": "Contract Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "ContractDescription": {
+                  "type": "string",
+                  "description": "Contract Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractCategory": {
+                  "type": "string",
+                  "description": "Contract Category",
+                  "x-ms-summary": "Category",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_cat"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_cat"
+                      }
+                    }
+                  }
+                },
+                "ContractConclusion": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Conclusion",
+                  "x-ms-summary": "Conclusion",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractBegin": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Begin",
+                  "x-ms-summary": "Begin",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractEnd": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract End",
+                  "x-ms-summary": "End",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractUnlimited": {
+                  "type": "boolean",
+                  "description": "Contract Unlimited",
+                  "x-ms-summary": "Unlimited",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractMinDuration": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Contract Min. Duration",
+                  "x-ms-summary": "Min. Duration",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contract Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_company"
+                      }
+                    }
+                  }
+                },
+                "ContractContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Contract Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_contact"
+                      }
+                    }
+                  }
+                },
+                "ContractValidity": {
+                  "type": "string",
+                  "description": "Contract Validity",
+                  "x-ms-summary": "Validity",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_validity"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_validity"
+                      }
+                    }
+                  }
+                },
+                "ContractPaymentTarget": {
+                  "type": "number",
+                  "description": "Contract Payment target",
+                  "x-ms-summary": "Payment target",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractSupervisor": {
+                  "type": "string",
+                  "description": "Contract Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_supervisor"
+                      }
+                    }
+                  }
+                },
+                "ContractRemarks": {
+                  "type": "string",
+                  "description": "Contract Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractLinks": {
+                  "type": "string",
+                  "description": "Contract Links",
+                  "x-ms-summary": "Links",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetContractMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "contract_links"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetContractMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "contract_links"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["ExternalId", "ContractName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts('{contractId}')/Documents": {
+      "get": {
+        "summary": "Get All Contract's documents",
+        "description": "Get All Contract's documents",
+        "operationId": "GetContractDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contractId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts('{contractId}')/GeneralDocuments": {
+      "get": {
+        "summary": "Get Contract's GeneralDocuments",
+        "description": "Get Contract's GeneralDocuments",
+        "operationId": "GetContractGeneralDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contractId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts('{contractId}')/Messages": {
+      "get": {
+        "summary": "Get Contract's Messages",
+        "description": "Get Contract's Messages",
+        "operationId": "GetContactMessages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contractId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts('{contractId}')/GeneralContracts": {
+      "get": {
+        "summary": "Get Contract's GeneralContracts",
+        "description": "Get Contract's GeneralContracts",
+        "operationId": "GetContractGeneralContracts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/contractId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts('{contractId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Contract",
+        "description": "Upload Document to Contract",
+        "operationId": "UploadDocumentToContract",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Contract Internal Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetContractContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetContractContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts(extid='{contractExternalId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Contract by External Id",
+        "description": "Upload Document to Contract by External Id",
+        "operationId": "UploadDocumentToContractByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "contractExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Contract External Id (reference from Master source data)",
+            "x-ms-summary": "Contract External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetContractContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetContractContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts(extid='{contractExternalId}')/GeneralDocument/Upload": {
+      "post": {
+        "summary": "Upload GeneralDocument to Contract by External Id",
+        "description": "Upload Document to Contract by External Id",
+        "operationId": "UploadGeneralDocumentToContractByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "contractExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Contract External Id (reference from Master source data)",
+            "x-ms-summary": "Contract External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "internal",
+            "required": true,
+            "default": "CompanyGeneralDocument"
+          },
+          {
+            "name": "Direction",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's direction",
+            "x-ms-summary": "Direction",
+            "x-ms-visibility": "advanced",
+            "default": "Eingang",
+            "enum": ["Eingang", "Ausgang"]
+          },
+          {
+            "name": "Remarks",
+            "in": "formData",
+            "type": "string",
+            "description": "Remarks",
+            "x-ms-summary": "Remarks",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Contracts/Upload": {
+      "post": {
+        "summary": "Upload Document to Contracts pool",
+        "description": "Upload Document to Contracts pool",
+        "operationId": "UploadDocumentToContractPool",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetContractContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetContractContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers/$metadata": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get OtherDossier metadata",
+        "description": "Get OtherDossier metadata (lookup values)",
+        "operationId": "GetOtherDossierMetadata",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers/$contentTypes": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get OtherDossier ContentTypes",
+        "description": "Get OtherDossiers allowed contentTypes",
+        "operationId": "GetOtherDossierContentTypes",
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": ["Document", "Folder"]
+          },
+          {
+            "name": "returnIds",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers": {
+      "get": {
+        "summary": "Get All OtherDossiers",
+        "description": "Get All OtherDossiers",
+        "operationId": "GetAllOtherDossiers",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Create OtherDossier",
+        "description": "Create OtherDossier",
+        "operationId": "CreateOtherDossier",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "OtherDossier External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "OtherDossierName": {
+                  "type": "string",
+                  "description": "OtherDossier Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "OtherDossierDescription": {
+                  "type": "string",
+                  "description": "OtherDossier Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "OtherDossierDeadline": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "OtherDossier Deadline",
+                  "x-ms-summary": "Deadline",
+                  "x-ms-visibility": "advanced"
+                },
+                "OtherDossierStatus": {
+                  "type": "string",
+                  "description": "Current OtherDossier Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_status"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "OtherDossier Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_company"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "OtherDossier Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_contact"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierSupervisor": {
+                  "type": "string",
+                  "description": "OtherDossier Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_supervisor"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierRemarks": {
+                  "type": "string",
+                  "description": "OtherDossier Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "required": ["ExternalId", "OtherDossierName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')": {
+      "get": {
+        "summary": "Get OtherDossier",
+        "description": "Get OtherDossier",
+        "operationId": "GetOtherDossier",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update OtherDossier",
+        "description": "Update OtherDossier properties",
+        "operationId": "PatchOtherDossier",
+        "parameters": [
+          {
+            "name": "otherDossierId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Version",
+                  "x-ms-summary": "Version",
+                  "x-ms-visibility": "important"
+                },
+                "ExternalId": {
+                  "type": "string",
+                  "description": "OtherDossier External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "OtherDossierName": {
+                  "type": "string",
+                  "description": "OtherDossier Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "OtherDossierDescription": {
+                  "type": "string",
+                  "description": "OtherDossier Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "OtherDossierDeadline": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "OtherDossier Deadline",
+                  "x-ms-summary": "Deadline",
+                  "x-ms-visibility": "advanced"
+                },
+                "OtherDossierStatus": {
+                  "type": "string",
+                  "description": "Current OtherDossier Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_status"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "OtherDossier Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_company"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "OtherDossier Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_contact"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierSupervisor": {
+                  "type": "string",
+                  "description": "OtherDossier Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_supervisor"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierRemarks": {
+                  "type": "string",
+                  "description": "OtherDossier Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "default": {
+                "Version": 1
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers(extid='{otherDossierExternalId}')": {
+      "get": {
+        "summary": "Get OtherDossier by External Id",
+        "description": "Get OtherDossier by External Id",
+        "operationId": "GetOtherDossierByExternalId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierExternalId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert OtherDossier by External Id",
+        "description": "Create/Update OtherDossier by External Id",
+        "operationId": "UpsertOtherDossierByExternalId",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "otherDossierExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "OtherDossier External Id (reference from Master source data)",
+            "x-ms-summary": "OtherDossier External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "OtherDossier External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "OtherDossierName": {
+                  "type": "string",
+                  "description": "OtherDossier Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "OtherDossierDescription": {
+                  "type": "string",
+                  "description": "OtherDossier Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "OtherDossierDeadline": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "OtherDossier Deadline",
+                  "x-ms-summary": "Deadline",
+                  "x-ms-visibility": "advanced"
+                },
+                "OtherDossierStatus": {
+                  "type": "string",
+                  "description": "Current OtherDossier Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_status"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "OtherDossier Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_company"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "OtherDossier Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_contact"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierSupervisor": {
+                  "type": "string",
+                  "description": "OtherDossier Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "otherdossier_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOtherDossierMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "otherdossier_supervisor"
+                      }
+                    }
+                  }
+                },
+                "OtherDossierRemarks": {
+                  "type": "string",
+                  "description": "OtherDossier Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "required": ["ExternalId", "OtherDossierName"]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/Documents": {
+      "get": {
+        "summary": "Get All OtherDossier's documents",
+        "description": "Get All OtherDossier's documents",
+        "operationId": "GetOtherDossierDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/GeneralDocuments": {
+      "get": {
+        "summary": "Get OtherDossier's GeneralDocuments",
+        "description": "Get OtherDossier's GeneralDocuments",
+        "operationId": "GetOtherDossierGeneralDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/Messages": {
+      "get": {
+        "summary": "Get OtherDossier's Messages",
+        "description": "Get OtherDossier's Messages",
+        "operationId": "GetOtherDossierMessages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/OutgoingInvoices": {
+      "get": {
+        "summary": "Get OtherDossier's Outgoing Invoices",
+        "description": "Get OtherDossier's Outgoing Invoices",
+        "operationId": "GetOtherDossierOutgoingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/IncomingInvoices": {
+      "get": {
+        "summary": "Get OtherDossier's Incoming Invoices",
+        "description": "Get OtherDossier's Incoming Invoices",
+        "operationId": "GetOtherDossierIncomingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/Offers": {
+      "get": {
+        "summary": "Get OtherDossier's Offers",
+        "description": "Get OtherDossier's Offers",
+        "operationId": "GetOtherDossierOffers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/Orders": {
+      "get": {
+        "summary": "Get OtherDossier's Orders",
+        "description": "Get OtherDossier's Orders",
+        "operationId": "GetOtherDossierOrders",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/OrdersConfirmations": {
+      "get": {
+        "summary": "Get OtherDossier's Orders Confirmations",
+        "description": "Get OtherDossier's Orders Confirmations",
+        "operationId": "GetOtherDossierOrdersConfirmations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/Protocols": {
+      "get": {
+        "summary": "Get OtherDossier's Protocols",
+        "description": "Get OtherDossier's Protocols",
+        "operationId": "GetOtherDossierProtocols",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to OtherDossier",
+        "description": "Upload Document to OtherDossier",
+        "operationId": "UploadDocumentToOtherDossier",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "otherDossierId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "OtherDossier Internal Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetOtherDossierContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetOtherDossierContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers(extid='{otherDossierExternalId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to OtherDossier by External Id",
+        "description": "Upload Document to OtherDossier by External Id",
+        "operationId": "UploadDocumentToOtherDossierByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "otherDossierExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "OtherDossier External Id (reference from Master source data)",
+            "x-ms-summary": "OtherDossier External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetOtherDossierContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetOtherDossierContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers(extid='{otherDossierExternalId}')/GeneralDocument/Upload": {
+      "post": {
+        "summary": "Upload GeneralDocument to OtherDossier by External Id",
+        "description": "Upload Document to OtherDossier by External Id",
+        "operationId": "UploadGeneralDocumentToOtherDossierByExternalId",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "otherDossierExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "OtherDossier External Id (reference from Master source data)",
+            "x-ms-summary": "OtherDossier External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "internal",
+            "required": true,
+            "default": "OtherDossierGeneralDocument"
+          },
+          {
+            "name": "Direction",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's direction",
+            "x-ms-summary": "Direction",
+            "x-ms-visibility": "advanced",
+            "default": "Eingang",
+            "enum": ["Eingang", "Ausgang"]
+          },
+          {
+            "name": "Remarks",
+            "in": "formData",
+            "type": "string",
+            "description": "Remarks",
+            "x-ms-summary": "Remarks",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers/Upload": {
+      "post": {
+        "summary": "Upload Document to OtherDossiers pool",
+        "description": "Upload Document to OtherDossiers pool",
+        "operationId": "UploadDocumentToOtherDossierPool",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetOtherDossierContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetOtherDossierContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "companyId": {
+      "name": "companyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Company Internal Id (unique inPoint.Go identifier)",
+      "x-ms-summary": "Internal Id",
+      "x-ms-visibility": "important"
+    },
+    "companyExternalId": {
+      "name": "companyExternalId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Company External Id (reference from Master source data)",
+      "x-ms-summary": "External ID",
+      "x-ms-visibility": "important"
+    },
+    "contactId": {
+      "name": "contactId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Contact Internal Id (unique inPoint.Go identifier)",
+      "x-ms-summary": "Internal Id",
+      "x-ms-visibility": "important"
+    },
+    "contactExternalId": {
+      "name": "contactExternalId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Contact External Id (reference from Master source data)",
+      "x-ms-summary": "External ID",
+      "x-ms-visibility": "important"
+    },
+    "contractId": {
+      "name": "contractId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Contract Internal Id (unique inPoint.Go identifier)",
+      "x-ms-summary": "Internal Id",
+      "x-ms-visibility": "important"
+    },
+    "contractExternalId": {
+      "name": "contractExternalId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Contract External Id (reference from Master source data)",
+      "x-ms-summary": "External ID",
+      "x-ms-visibility": "important"
+    },
+    "otherDossierId": {
+      "name": "otherDossierId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "OtherDossier Internal Id (unique inPoint.Go identifier)",
+      "x-ms-summary": "Internal Id",
+      "x-ms-visibility": "important"
+    },
+    "otherDossierExternalId": {
+      "name": "otherDossierExternalId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "OtherDossier External Id (reference from Master source data)",
+      "x-ms-summary": "External ID",
+      "x-ms-visibility": "important"
+    }
+  },
+  "responses": {},
+  "securityDefinitions": {
+    "basic-auth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basic-auth": []
+    }
+  ],
+  "tags": [],
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Website",
+      "propertyValue": "https://www.hs-soft.com"
+    },
+    {
+      "propertyName": "Privacy policy",
+      "propertyValue": "https://www.hs-soft.com/privacy"
+    },
+    {
+      "propertyName": "Categories",
+      "propertyValue": "Data"
+    }
+  ]
+}
