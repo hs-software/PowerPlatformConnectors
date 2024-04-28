@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.3.1",
+    "version": "0.4.1",
     "title": "inPoint.Go API",
     "description": "inPoint.Go ODATA API connector for managing Dossiers",
     "contact": {
@@ -10,11 +10,18 @@
       "email": "support@hs-soft.com"
     }
   },
-  "host": "www.hs-soft.com",
+  "host": "2fv772sh-33333.euw.devtunnels.ms",
   "basePath": "/goapi",
-  "schemes": ["https"],
-  "consumes": ["multipart/form-data", "application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "multipart/form-data",
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/Companies/$metadata": {
       "get": {
@@ -50,7 +57,10 @@
             "in": "query",
             "type": "string",
             "required": false,
-            "enum": ["Document", "Folder"]
+            "enum": [
+              "Document",
+              "Folder"
+            ]
           },
           {
             "name": "returnIds",
@@ -58,6 +68,7 @@
             "type": "boolean",
             "required": false
           }
+
         ],
         "responses": {
           "default": {
@@ -200,6 +211,12 @@
                   "x-ms-summary": "Domain",
                   "x-ms-visibility": "advanced"
                 },
+                "CompanyValidation": {
+                  "type": "string",
+                  "description": "Company Validation",
+                  "x-ms-summary": "Validation",
+                  "x-ms-visibility": "advanced"
+                },
                 "CompanySupervisor": {
                   "type": "string",
                   "description": "Company Supervisor name",
@@ -223,7 +240,10 @@
                   }
                 }
               },
-              "required": ["ExternalId", "CompanyName"]
+              "required": [
+                "ExternalId",
+                "CompanyName"
+              ]
             }
           }
         ],
@@ -382,6 +402,12 @@
                   "type": "string",
                   "description": "Company Domain",
                   "x-ms-summary": "Domain",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyValidation": {
+                  "type": "string",
+                  "description": "Company Validation",
+                  "x-ms-summary": "Validation",
                   "x-ms-visibility": "advanced"
                 },
                 "CompanySupervisor": {
@@ -569,6 +595,12 @@
                   "x-ms-summary": "Domain",
                   "x-ms-visibility": "advanced"
                 },
+                "CompanyValidation": {
+                  "type": "string",
+                  "description": "Company Validation",
+                  "x-ms-summary": "Validation",
+                  "x-ms-visibility": "advanced"
+                },
                 "CompanySupervisor": {
                   "type": "string",
                   "description": "Company Supervisor name",
@@ -592,7 +624,10 @@
                   }
                 }
               },
-              "required": ["ExternalId", "CompanyName"]
+              "required": [
+                "ExternalId",
+                "CompanyName"
+              ]
             }
           }
         ],
@@ -717,7 +752,9 @@
         "summary": "Upload Document to Company",
         "description": "Upload Document to Company",
         "operationId": "UploadDocumentToCompany",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "companyId",
@@ -767,7 +804,9 @@
         "summary": "Upload Document to Company by External Id",
         "description": "Upload Document to Company by External Id",
         "operationId": "UploadDocumentToCompanyByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "companyExternalId",
@@ -818,7 +857,9 @@
         "summary": "Upload GeneralDocument to Company by External Id",
         "description": "Upload Document to Company by External Id",
         "operationId": "UploadGeneralDocumentToCompanyByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "companyExternalId",
@@ -854,7 +895,10 @@
             "x-ms-summary": "Direction",
             "x-ms-visibility": "advanced",
             "default": "Eingang",
-            "enum": ["Eingang", "Ausgang"]
+            "enum": [
+              "Eingang",
+              "Ausgang"
+            ]
           },
           {
             "name": "Remarks",
@@ -878,7 +922,9 @@
         "summary": "Upload Document to Companies pool",
         "description": "Upload Document to Companies pool",
         "operationId": "UploadDocumentToCompanyPool",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "ContentFiles",
@@ -949,7 +995,10 @@
             "in": "query",
             "type": "string",
             "required": false,
-            "enum": ["Document", "Folder"]
+            "enum": [
+              "Document",
+              "Folder"
+            ]
           },
           {
             "name": "returnIds",
@@ -957,6 +1006,7 @@
             "type": "boolean",
             "required": false
           }
+
         ],
         "responses": {
           "default": {
@@ -1172,7 +1222,10 @@
                   }
                 }
               },
-              "required": ["ExternalId", "ContactName"]
+              "required": [
+                "ExternalId",
+                "ContactName"
+              ]
             }
           }
         ],
@@ -1642,7 +1695,10 @@
                   }
                 }
               },
-              "required": ["ExternalId", "ContactName"]
+              "required": [
+                "ExternalId",
+                "ContactName"
+              ]
             }
           }
         ],
@@ -1695,7 +1751,9 @@
         "summary": "Upload Document to Contact",
         "description": "Upload Document to Contact",
         "operationId": "UploadDocumentToContact",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "contactId",
@@ -1745,7 +1803,9 @@
         "summary": "Upload Document to Contact by External Id",
         "description": "Upload Document to Contact by External Id",
         "operationId": "UploadDocumentToContactByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "contactExternalId",
@@ -1796,7 +1856,9 @@
         "summary": "Upload GeneralDocument to Contact by External Id",
         "description": "Upload Document to Contact by External Id",
         "operationId": "UploadGeneralDocumentToContactByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "contactExternalId",
@@ -1832,7 +1894,10 @@
             "x-ms-summary": "Direction",
             "x-ms-visibility": "advanced",
             "default": "Eingang",
-            "enum": ["Eingang", "Ausgang"]
+            "enum": [
+              "Eingang",
+              "Ausgang"
+            ]
           },
           {
             "name": "Remarks",
@@ -1885,7 +1950,10 @@
             "in": "query",
             "type": "string",
             "required": false,
-            "enum": ["Document", "Folder"]
+            "enum": [
+              "Document",
+              "Folder"
+            ]
           },
           {
             "name": "returnIds",
@@ -1893,6 +1961,7 @@
             "type": "boolean",
             "required": false
           }
+
         ],
         "responses": {
           "default": {
@@ -2130,7 +2199,10 @@
                   }
                 }
               },
-              "required": ["ExternalId", "ContractName"]
+              "required": [
+                "ExternalId",
+                "ContractName"
+              ]
             }
           }
         ],
@@ -2643,7 +2715,10 @@
                   }
                 }
               },
-              "required": ["ExternalId", "ContractName"]
+              "required": [
+                "ExternalId",
+                "ContractName"
+              ]
             }
           }
         ],
@@ -2732,7 +2807,9 @@
         "summary": "Upload Document to Contract",
         "description": "Upload Document to Contract",
         "operationId": "UploadDocumentToContract",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "contractId",
@@ -2782,7 +2859,9 @@
         "summary": "Upload Document to Contract by External Id",
         "description": "Upload Document to Contract by External Id",
         "operationId": "UploadDocumentToContractByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "contractExternalId",
@@ -2833,7 +2912,9 @@
         "summary": "Upload GeneralDocument to Contract by External Id",
         "description": "Upload Document to Contract by External Id",
         "operationId": "UploadGeneralDocumentToContractByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "contractExternalId",
@@ -2869,7 +2950,10 @@
             "x-ms-summary": "Direction",
             "x-ms-visibility": "advanced",
             "default": "Eingang",
-            "enum": ["Eingang", "Ausgang"]
+            "enum": [
+              "Eingang",
+              "Ausgang"
+            ]
           },
           {
             "name": "Remarks",
@@ -2893,7 +2977,9 @@
         "summary": "Upload Document to Contracts pool",
         "description": "Upload Document to Contracts pool",
         "operationId": "UploadDocumentToContractPool",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "ContentFiles",
@@ -2964,7 +3050,10 @@
             "in": "query",
             "type": "string",
             "required": false,
-            "enum": ["Document", "Folder"]
+            "enum": [
+              "Document",
+              "Folder"
+            ]
           },
           {
             "name": "returnIds",
@@ -2972,6 +3061,7 @@
             "type": "boolean",
             "required": false
           }
+
         ],
         "responses": {
           "default": {
@@ -3132,7 +3222,10 @@
                   "x-ms-visibility": "advanced"
                 }
               },
-              "required": ["ExternalId", "OtherDossierName"]
+              "required": [
+                "ExternalId",
+                "OtherDossierName"
+              ]
             }
           }
         ],
@@ -3491,7 +3584,10 @@
                   "x-ms-visibility": "advanced"
                 }
               },
-              "required": ["ExternalId", "OtherDossierName"]
+              "required": [
+                "ExternalId",
+                "OtherDossierName"
+              ]
             }
           }
         ],
@@ -3670,7 +3766,9 @@
         "summary": "Upload Document to OtherDossier",
         "description": "Upload Document to OtherDossier",
         "operationId": "UploadDocumentToOtherDossier",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "otherDossierId",
@@ -3720,7 +3818,9 @@
         "summary": "Upload Document to OtherDossier by External Id",
         "description": "Upload Document to OtherDossier by External Id",
         "operationId": "UploadDocumentToOtherDossierByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "otherDossierExternalId",
@@ -3771,7 +3871,9 @@
         "summary": "Upload GeneralDocument to OtherDossier by External Id",
         "description": "Upload Document to OtherDossier by External Id",
         "operationId": "UploadGeneralDocumentToOtherDossierByExternalId",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "otherDossierExternalId",
@@ -3807,7 +3909,10 @@
             "x-ms-summary": "Direction",
             "x-ms-visibility": "advanced",
             "default": "Eingang",
-            "enum": ["Eingang", "Ausgang"]
+            "enum": [
+              "Eingang",
+              "Ausgang"
+            ]
           },
           {
             "name": "Remarks",
@@ -3831,7 +3936,9 @@
         "summary": "Upload Document to OtherDossiers pool",
         "description": "Upload Document to OtherDossiers pool",
         "operationId": "UploadDocumentToOtherDossierPool",
-        "consumes": ["multipart/form-data"],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "name": "ContentFiles",
