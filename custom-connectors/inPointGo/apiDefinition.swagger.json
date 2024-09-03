@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.4.1",
+    "version": "0.5.1",
     "title": "inPoint.Go API",
     "description": "inPoint.Go ODATA API connector for managing Dossiers",
     "contact": {
@@ -716,6 +716,42 @@
         "summary": "Get Company's Incoming Invoices",
         "description": "Get Company's Incoming Invoices",
         "operationId": "GetCompanyIncomingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/OutgoingDeliveries": {
+      "get": {
+        "summary": "Get Company's Outgoing Delivery notes",
+        "description": "Get Company's Outgoing Deliveries",
+        "operationId": "GetCompanyOutgoingDeliveries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/companyId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Companies('{companyId}')/IncomingDeliveries": {
+      "get": {
+        "summary": "Get Company's Incoming Delivery notes",
+        "description": "Get Company's Incoming Deliveries",
+        "operationId": "GetCompanyIncomingDeliveries",
         "parameters": [
           {
             "$ref": "#/parameters/companyId"
@@ -2070,6 +2106,12 @@
                   "x-ms-summary": "Min. Duration",
                   "x-ms-visibility": "advanced"
                 },
+                "ContractNoticePeriod": {
+                  "type": "number",
+                  "description": "Contract Period of notice (Months)",
+                  "x-ms-summary": "Notice period",
+                  "x-ms-visibility": "advanced"
+                },
                 "ContractCompanies": {
                   "type": "array",
                   "items": {
@@ -2329,6 +2371,12 @@
                   "x-ms-summary": "Min. Duration",
                   "x-ms-visibility": "advanced"
                 },
+                "ContractNoticePeriod": {
+                  "type": "number",
+                  "description": "Contract Period of notice (Months)",
+                  "x-ms-summary": "Notice period",
+                  "x-ms-visibility": "advanced"
+                },
                 "ContractCompanies": {
                   "type": "array",
                   "items": {
@@ -2584,6 +2632,12 @@
                   "format": "date-time",
                   "description": "Contract Min. Duration",
                   "x-ms-summary": "Min. Duration",
+                  "x-ms-visibility": "advanced"
+                },
+                "ContractNoticePeriod": {
+                  "type": "number",
+                  "description": "Contract Period of notice (Months)",
+                  "x-ms-summary": "Notice period",
                   "x-ms-visibility": "advanced"
                 },
                 "ContractCompanies": {
@@ -3689,6 +3743,42 @@
         }
       }
     },
+    "/OtherDossiers('{otherDossierId}')/OutgoingDeliveries": {
+      "get": {
+        "summary": "Get OtherDossier's Outgoing Delivery notes",
+        "description": "Get OtherDossier's Outgoing Deliveries",
+        "operationId": "GetOtherDossierOutgoingDeliveries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/IncomingDeliveries": {
+      "get": {
+        "summary": "Get OtherDossier's Incoming Delivery notes",
+        "description": "Get OtherDossier's Incoming Deliveries",
+        "operationId": "GetOtherDossierIncomingDeliveries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
     "/OtherDossiers('{otherDossierId}')/Offers": {
       "get": {
         "summary": "Get OtherDossier's Offers",
@@ -3707,11 +3797,29 @@
         }
       }
     },
-    "/OtherDossiers('{otherDossierId}')/Orders": {
+    "/OtherDossiers('{otherDossierId}')/IncomingOrders": {
       "get": {
-        "summary": "Get OtherDossier's Orders",
-        "description": "Get OtherDossier's Orders",
-        "operationId": "GetOtherDossierOrders",
+        "summary": "Get OtherDossier's Incoming Orders",
+        "description": "Get OtherDossier's Incoming Orders",
+        "operationId": "GetOtherDossierIncomingOrders",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/OutgoingOrders": {
+      "get": {
+        "summary": "Get OtherDossier's Outgoing Orders",
+        "description": "Get OtherDossier's Outgoing Orders",
+        "operationId": "GetOtherDossierOutgoingOrders",
         "parameters": [
           {
             "$ref": "#/parameters/otherDossierId"
@@ -3974,6 +4082,2142 @@
           }
         }
       }
+    },
+    "/Purchases/$metadata": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Purchase metadata",
+        "description": "Get Purchase metadata (lookup values)",
+        "operationId": "GetPurchaseMetadata",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases/$contentTypes": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Purchase ContentTypes",
+        "description": "Get Purchases allowed contentTypes",
+        "operationId": "GetPurchaseContentTypes",
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "Document",
+              "Folder"
+            ]
+          },
+          {
+            "name": "returnIds",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases": {
+      "get": {
+        "summary": "Get All Purchases",
+        "description": "Get All Purchases",
+        "operationId": "GetAllPurchases",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Purchase",
+        "description": "Create Purchase",
+        "operationId": "CreatePurchase",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Purchase External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "PurchaseName": {
+                  "type": "string",
+                  "description": "Purchase Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "PurchaseDescription": {
+                  "type": "string",
+                  "description": "Purchase Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseStatus": {
+                  "type": "string",
+                  "description": "Purchase Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_status"
+                      }
+                    }
+                  }
+                },
+                "PurchaseApprovalStatus": {
+                  "type": "string",
+                  "description": "Purchase Approval Status",
+                  "x-ms-summary": "Approval Status",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseTotal": {
+                  "type": "number",
+                  "description": "Purchase Total (Months)",
+                  "x-ms-summary": "Total",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseCurrency": {
+                  "type": "string",
+                  "description": "Purchase Currency",
+                  "x-ms-summary": "Currency",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_currency"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_currency"
+                      }
+                    }
+                  }
+                },
+                "JobNumberExternal": {
+                  "type": "string",
+                  "description": "Job Number (ext)",
+                  "x-ms-summary": "Job Number (ext)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderNumberInternal": {
+                  "type": "string",
+                  "description": "Purchase order (int)",
+                  "x-ms-summary": "Purchase order (int)",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Purchase Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_company"
+                      }
+                    }
+                  }
+                },
+                "PurchaseContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Purchase Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_contact"
+                      }
+                    }
+                  }
+                },
+                "PurchaseSupervisor": {
+                  "type": "string",
+                  "description": "Purchase Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_supervisor"
+                      }
+                    }
+                  }
+                },
+                "PurchaseRemarks": {
+                  "type": "string",
+                  "description": "Purchase Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "required": [
+                "ExternalId",
+                "PurchaseName"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')": {
+      "get": {
+        "summary": "Get Purchase",
+        "description": "Get Purchase",
+        "operationId": "GetPurchase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Purchase",
+        "description": "Update Purchase properties",
+        "operationId": "PatchPurchase",
+        "parameters": [
+          {
+            "name": "purchaseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Version",
+                  "x-ms-summary": "Version",
+                  "x-ms-visibility": "important"
+                },
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Purchase External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "PurchaseName": {
+                  "type": "string",
+                  "description": "Purchase Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "PurchaseDescription": {
+                  "type": "string",
+                  "description": "Purchase Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseStatus": {
+                  "type": "string",
+                  "description": "Purchase Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_status"
+                      }
+                    }
+                  }
+                },
+                "PurchaseApprovalStatus": {
+                  "type": "string",
+                  "description": "Purchase Approval Status",
+                  "x-ms-summary": "Approval Status",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseTotal": {
+                  "type": "number",
+                  "description": "Purchase Total (Months)",
+                  "x-ms-summary": "Total",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseCurrency": {
+                  "type": "string",
+                  "description": "Purchase Currency",
+                  "x-ms-summary": "Currency",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_currency"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_currency"
+                      }
+                    }
+                  }
+                },
+                "JobNumberExternal": {
+                  "type": "string",
+                  "description": "Job Number (ext)",
+                  "x-ms-summary": "Job Number (ext)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderNumberInternal": {
+                  "type": "string",
+                  "description": "Purchase order (int)",
+                  "x-ms-summary": "Purchase order (int)",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Purchase Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_company"
+                      }
+                    }
+                  }
+                },
+                "PurchaseContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Purchase Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_contact"
+                      }
+                    }
+                  }
+                },
+                "PurchaseSupervisor": {
+                  "type": "string",
+                  "description": "Purchase Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_supervisor"
+                      }
+                    }
+                  }
+                },
+                "PurchaseRemarks": {
+                  "type": "string",
+                  "description": "Purchase Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "default": {
+                "Version": 1
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases(extid='{purchaseExternalId}')": {
+      "get": {
+        "summary": "Get Purchase by External Id",
+        "description": "Get Purchase by External Id",
+        "operationId": "GetPurchaseByExternalId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseExternalId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert Purchase by External Id",
+        "description": "Create/Update Purchase by External Id",
+        "operationId": "UpsertPurchaseByExternalId",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "purchaseExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Purchase External Id (reference from Master source data)",
+            "x-ms-summary": "Purchase External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Purchase External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "PurchaseName": {
+                  "type": "string",
+                  "description": "Purchase Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "PurchaseDescription": {
+                  "type": "string",
+                  "description": "Purchase Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseStatus": {
+                  "type": "string",
+                  "description": "Purchase Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_status"
+                      }
+                    }
+                  }
+                },
+                "PurchaseApprovalStatus": {
+                  "type": "string",
+                  "description": "Purchase Approval Status",
+                  "x-ms-summary": "Approval Status",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseTotal": {
+                  "type": "number",
+                  "description": "Purchase Total (Months)",
+                  "x-ms-summary": "Total",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseCurrency": {
+                  "type": "string",
+                  "description": "Purchase Currency",
+                  "x-ms-summary": "Currency",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_currency"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_currency"
+                      }
+                    }
+                  }
+                },
+                "JobNumberExternal": {
+                  "type": "string",
+                  "description": "Job Number (ext)",
+                  "x-ms-summary": "Job Number (ext)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderNumberInternal": {
+                  "type": "string",
+                  "description": "Purchase order (int)",
+                  "x-ms-summary": "Purchase order (int)",
+                  "x-ms-visibility": "advanced"
+                },
+                "PurchaseCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Purchase Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_company"
+                      }
+                    }
+                  }
+                },
+                "PurchaseContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Purchase Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_contact"
+                      }
+                    }
+                  }
+                },
+                "PurchaseSupervisor": {
+                  "type": "string",
+                  "description": "Purchase Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetPurchaseMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "purchase_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetPurchaseMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "purchase_supervisor"
+                      }
+                    }
+                  }
+                },
+                "PurchaseRemarks": {
+                  "type": "string",
+                  "description": "Purchase Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "required": [
+                "ExternalId",
+                "PurchaseName"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/Documents": {
+      "get": {
+        "summary": "Get All Purchase's documents",
+        "description": "Get All Purchase's documents",
+        "operationId": "GetPurchaseDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/GeneralDocuments": {
+      "get": {
+        "summary": "Get Purchase's GeneralDocuments",
+        "description": "Get Purchase's GeneralDocuments",
+        "operationId": "GetPurchaseGeneralDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/Messages": {
+      "get": {
+        "summary": "Get Purchase's Messages",
+        "description": "Get Purchase's Messages",
+        "operationId": "GetContactMessages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/Offers": {
+      "get": {
+        "summary": "Get Purchase's Offers",
+        "description": "Get Purchase's Offers",
+        "operationId": "GetPurchaseOffers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/OutgoingOrders": {
+      "get": {
+        "summary": "Get Purchase's Outgoing Orders",
+        "description": "Get Purchase's Outgoing Orders",
+        "operationId": "GetPurchaseOutgoingOrders",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/OrdersConfirmations": {
+      "get": {
+        "summary": "Get Purchase's Orders Confirmations",
+        "description": "Get Purchase's Orders Confirmations",
+        "operationId": "GetPurchaseOrdersConfirmations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/IncomingInvoices": {
+      "get": {
+        "summary": "Get Purchase's Incoming Invoices",
+        "description": "Get Purchase's Incoming Invoices",
+        "operationId": "GetPurchaseIncomingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/IncomingDeliveries": {
+      "get": {
+        "summary": "Get Purchase's Incoming Delivery notes",
+        "description": "Get Purchase's Incoming Deliveries",
+        "operationId": "Purchase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/Protocols": {
+      "get": {
+        "summary": "Get Purchase's Protocols",
+        "description": "Get Purchase's Protocols",
+        "operationId": "GetPurchaseProtocols",
+        "parameters": [
+          {
+            "$ref": "#/parameters/purchaseId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases('{purchaseId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Purchase",
+        "description": "Upload Document to Purchase",
+        "operationId": "UploadDocumentToPurchase",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "purchaseId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Purchase Internal Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetPurchaseContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetPurchaseContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases(extid='{purchaseExternalId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Purchase by External Id",
+        "description": "Upload Document to Purchase by External Id",
+        "operationId": "UploadDocumentToPurchaseByExternalId",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "purchaseExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Purchase External Id (reference from Master source data)",
+            "x-ms-summary": "Purchase External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetPurchaseContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetPurchaseContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases(extid='{purchaseExternalId}')/GeneralDocument/Upload": {
+      "post": {
+        "summary": "Upload GeneralDocument to Purchase by External Id",
+        "description": "Upload Document to Purchase by External Id",
+        "operationId": "UploadGeneralDocumentToPurchaseByExternalId",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "purchaseExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Purchase External Id (reference from Master source data)",
+            "x-ms-summary": "Purchase External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "internal",
+            "required": true,
+            "default": "CompanyGeneralDocument"
+          },
+          {
+            "name": "Direction",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's direction",
+            "x-ms-summary": "Direction",
+            "x-ms-visibility": "advanced",
+            "default": "Eingang",
+            "enum": [
+              "Eingang",
+              "Ausgang"
+            ]
+          },
+          {
+            "name": "Remarks",
+            "in": "formData",
+            "type": "string",
+            "description": "Remarks",
+            "x-ms-summary": "Remarks",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Purchases/Upload": {
+      "post": {
+        "summary": "Upload Document to Purchases pool",
+        "description": "Upload Document to Purchases pool",
+        "operationId": "UploadDocumentToPurchasePool",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetPurchaseContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetPurchaseContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+
+
+    "/Orders/$metadata": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Order metadata",
+        "description": "Get Order metadata (lookup values)",
+        "operationId": "GetOrderMetadata",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders/$contentTypes": {
+      "get": {
+        "x-ms-visibility": "internal",
+        "summary": "Get Order ContentTypes",
+        "description": "Get Orders allowed contentTypes",
+        "operationId": "GetOrderContentTypes",
+        "parameters": [
+          {
+            "name": "itemType",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "Document",
+              "Folder"
+            ]
+          },
+          {
+            "name": "returnIds",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders": {
+      "get": {
+        "summary": "Get All Orders",
+        "description": "Get All Orders",
+        "operationId": "GetAllOrders",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Order",
+        "description": "Create Order",
+        "operationId": "CreateOrder",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Order External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "OrderName": {
+                  "type": "string",
+                  "description": "Order Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "OrderDescription": {
+                  "type": "string",
+                  "description": "Order Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderStatus": {
+                  "type": "string",
+                  "description": "Order Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_status"
+                      }
+                    }
+                  }
+                },
+                "OrderTotal": {
+                  "type": "number",
+                  "description": "Order Total (Months)",
+                  "x-ms-summary": "Total",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderCurrency": {
+                  "type": "string",
+                  "description": "Order Currency",
+                  "x-ms-summary": "Currency",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_currency"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_currency"
+                      }
+                    }
+                  }
+                },
+                "JobNumberInternal": {
+                  "type": "string",
+                  "description": "Job Number (int)",
+                  "x-ms-summary": "Job Number (int)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderNumberExternal": {
+                  "type": "string",
+                  "description": "Order (ext)",
+                  "x-ms-summary": "Order (ext)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Order Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_company"
+                      }
+                    }
+                  }
+                },
+                "OrderContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Order Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_contact"
+                      }
+                    }
+                  }
+                },
+                "OrderSupervisor": {
+                  "type": "string",
+                  "description": "Order Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_supervisor"
+                      }
+                    }
+                  }
+                },
+                "OrderRemarks": {
+                  "type": "string",
+                  "description": "Order Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "required": [
+                "ExternalId",
+                "OrderName"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')": {
+      "get": {
+        "summary": "Get Order",
+        "description": "Get Order",
+        "operationId": "GetOrder",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Order",
+        "description": "Update Order properties",
+        "operationId": "PatchOrder",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Version",
+                  "x-ms-summary": "Version",
+                  "x-ms-visibility": "important"
+                },
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Order External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "OrderName": {
+                  "type": "string",
+                  "description": "Order Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "OrderDescription": {
+                  "type": "string",
+                  "description": "Order Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderStatus": {
+                  "type": "string",
+                  "description": "Order Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_status"
+                      }
+                    }
+                  }
+                },
+                "OrderTotal": {
+                  "type": "number",
+                  "description": "Order Total (Months)",
+                  "x-ms-summary": "Total",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderCurrency": {
+                  "type": "string",
+                  "description": "Order Currency",
+                  "x-ms-summary": "Currency",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_currency"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_currency"
+                      }
+                    }
+                  }
+                },
+                "JobNumberInternal": {
+                  "type": "string",
+                  "description": "Job Number (int)",
+                  "x-ms-summary": "Job Number (int)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderNumberExternal": {
+                  "type": "string",
+                  "description": "Order (ext)",
+                  "x-ms-summary": "Order (ext)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Order Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_company"
+                      }
+                    }
+                  }
+                },
+                "OrderContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Order Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_contact"
+                      }
+                    }
+                  }
+                },
+                "OrderSupervisor": {
+                  "type": "string",
+                  "description": "Order Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_supervisor"
+                      }
+                    }
+                  }
+                },
+                "OrderRemarks": {
+                  "type": "string",
+                  "description": "Order Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "default": {
+                "Version": 1
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders(extid='{orderExternalId}')": {
+      "get": {
+        "summary": "Get Order by External Id",
+        "description": "Get Order by External Id",
+        "operationId": "GetOrderByExternalId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderExternalId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert Order by External Id",
+        "description": "Create/Update Order by External Id",
+        "operationId": "UpsertOrderByExternalId",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "orderExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Order External Id (reference from Master source data)",
+            "x-ms-summary": "Order External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ExternalId": {
+                  "type": "string",
+                  "description": "Order External Id (reference from Master source data)",
+                  "x-ms-summary": "External ID",
+                  "x-ms-visibility": "important"
+                },
+                "OrderName": {
+                  "type": "string",
+                  "description": "Order Name",
+                  "x-ms-summary": "Name",
+                  "x-ms-visibility": "important"
+                },
+                "OrderDescription": {
+                  "type": "string",
+                  "description": "Order Description",
+                  "x-ms-summary": "Description",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderStatus": {
+                  "type": "string",
+                  "description": "Order Status",
+                  "x-ms-summary": "Status",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_status"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_status"
+                      }
+                    }
+                  }
+                },
+                "OrderTotal": {
+                  "type": "number",
+                  "description": "Order Total (Months)",
+                  "x-ms-summary": "Total",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderCurrency": {
+                  "type": "string",
+                  "description": "Order Currency",
+                  "x-ms-summary": "Currency",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_currency"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_currency"
+                      }
+                    }
+                  }
+                },
+                "JobNumberInternal": {
+                  "type": "string",
+                  "description": "Job Number (int)",
+                  "x-ms-summary": "Job Number (int)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderNumberExternal": {
+                  "type": "string",
+                  "description": "Order (ext)",
+                  "x-ms-summary": "Order (ext)",
+                  "x-ms-visibility": "advanced"
+                },
+                "OrderCompanies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Order Companies names",
+                  "x-ms-summary": "Companies names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_company"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_company"
+                      }
+                    }
+                  }
+                },
+                "OrderContacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Order Contacts names",
+                  "x-ms-summary": "Contacts names",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_contact"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_contact"
+                      }
+                    }
+                  }
+                },
+                "OrderSupervisor": {
+                  "type": "string",
+                  "description": "Order Supervisor name",
+                  "x-ms-summary": "Supervisor name",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-dynamic-values": {
+                    "operationId": "GetOrderMetadata",
+                    "value-path": "text",
+                    "parameters": {
+                      "name": "order_supervisor"
+                    }
+                  },
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetOrderMetadata",
+                    "itemValuePath": "text",
+                    "parameters": {
+                      "name": {
+                        "value": "order_supervisor"
+                      }
+                    }
+                  }
+                },
+                "OrderRemarks": {
+                  "type": "string",
+                  "description": "Order Remarks",
+                  "x-ms-summary": "Remarks",
+                  "x-ms-visibility": "advanced"
+                }
+              },
+              "required": [
+                "ExternalId",
+                "OrderName"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/Documents": {
+      "get": {
+        "summary": "Get All Order's documents",
+        "description": "Get All Order's documents",
+        "operationId": "GetOrderDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/GeneralDocuments": {
+      "get": {
+        "summary": "Get Order's GeneralDocuments",
+        "description": "Get Order's GeneralDocuments",
+        "operationId": "GetOrderGeneralDocuments",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/Messages": {
+      "get": {
+        "summary": "Get Order's Messages",
+        "description": "Get Order's Messages",
+        "operationId": "GetContactMessages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/Offers": {
+      "get": {
+        "summary": "Get Order's Offers",
+        "description": "Get Order's Offers",
+        "operationId": "GetOrderOffers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/IncomingOrders": {
+      "get": {
+        "summary": "Get Orders's Incoming Orders",
+        "description": "Get Orders's Incoming Orders",
+        "operationId": "GetOrderIncomingOrders",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/OrdersConfirmations": {
+      "get": {
+        "summary": "Get Order's Orders Confirmations",
+        "description": "Get Order's Orders Confirmations",
+        "operationId": "GetOrderOrdersConfirmations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/OutgoingInvoices": {
+      "get": {
+        "summary": "Get Order's Outgoing Invoices",
+        "description": "Get Order's Outgoing Invoices",
+        "operationId": "GetOrderOutgoingInvoices",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/OutgoingDeliveries": {
+      "get": {
+        "summary": "Get Order's Outgoing Delivery notes",
+        "description": "Get Order's Outgoing Deliveries",
+        "operationId": "GetOrderOutgoingDeliveries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/Protocols": {
+      "get": {
+        "summary": "Get Order's Protocols",
+        "description": "Get Order's Protocols",
+        "operationId": "GetOrderProtocols",
+        "parameters": [
+          {
+            "$ref": "#/parameters/orderId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders('{orderId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Order",
+        "description": "Upload Document to Order",
+        "operationId": "UploadDocumentToOrder",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Order Internal Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetOrderContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetOrderContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders(extid='{orderExternalId}')/Upload": {
+      "post": {
+        "summary": "Upload Document to Order by External Id",
+        "description": "Upload Document to Order by External Id",
+        "operationId": "UploadDocumentToOrderByExternalId",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "orderExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Order External Id (reference from Master source data)",
+            "x-ms-summary": "Order External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetOrderContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetOrderContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders(extid='{orderExternalId}')/GeneralDocument/Upload": {
+      "post": {
+        "summary": "Upload GeneralDocument to Order by External Id",
+        "description": "Upload Document to Order by External Id",
+        "operationId": "UploadGeneralDocumentToOrderByExternalId",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "orderExternalId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Order External Id (reference from Master source data)",
+            "x-ms-summary": "Order External Id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "internal",
+            "required": true,
+            "default": "CompanyGeneralDocument"
+          },
+          {
+            "name": "Direction",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's direction",
+            "x-ms-summary": "Direction",
+            "x-ms-visibility": "advanced",
+            "default": "Eingang",
+            "enum": [
+              "Eingang",
+              "Ausgang"
+            ]
+          },
+          {
+            "name": "Remarks",
+            "in": "formData",
+            "type": "string",
+            "description": "Remarks",
+            "x-ms-summary": "Remarks",
+            "x-ms-visibility": "advanced"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/Orders/Upload": {
+      "post": {
+        "summary": "Upload Document to Orders pool",
+        "description": "Upload Document to Orders pool",
+        "operationId": "UploadDocumentToOrderPool",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "ContentFiles",
+            "type": "file",
+            "in": "formData",
+            "required": true,
+            "description": "The file(s)"
+          },
+          {
+            "name": "ContentTypeName",
+            "type": "string",
+            "in": "formData",
+            "description": "The document's content type",
+            "x-ms-summary": "Content Type",
+            "x-ms-visibility": "important",
+            "required": true,
+            "x-ms-dynamic-values": {
+              "operationId": "GetOrderContentTypes",
+              "value-path": "key",
+              "value-title": "text"
+            },
+            "x-ms-dynamic-list": {
+              "operationId": "GetOrderContentTypes",
+              "itemValuePath": "key",
+              "itemTitlePath": "text"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
     }
   },
   "definitions": {},
@@ -4047,6 +6291,42 @@
       "required": true,
       "type": "string",
       "description": "OtherDossier External Id (reference from Master source data)",
+      "x-ms-summary": "External ID",
+      "x-ms-visibility": "important"
+    },
+    "purchaseId": {
+      "name": "purchaseId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Purchase Internal Id (unique inPoint.Go identifier)",
+      "x-ms-summary": "Internal Id",
+      "x-ms-visibility": "important"
+    },
+    "purchaseExternalId": {
+      "name": "purchaseExternalId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Purchase External Id (reference from Master source data)",
+      "x-ms-summary": "External ID",
+      "x-ms-visibility": "important"
+    },
+    "orderId": {
+      "name": "orderId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Order Internal Id (unique inPoint.Go identifier)",
+      "x-ms-summary": "Internal Id",
+      "x-ms-visibility": "important"
+    },
+    "orderExternalId": {
+      "name": "orderExternalId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Order External Id (reference from Master source data)",
       "x-ms-summary": "External ID",
       "x-ms-visibility": "important"
     }
