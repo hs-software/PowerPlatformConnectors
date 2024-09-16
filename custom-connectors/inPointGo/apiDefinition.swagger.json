@@ -3833,11 +3833,29 @@
         }
       }
     },
-    "/OtherDossiers('{otherDossierId}')/OrdersConfirmations": {
+    "/OtherDossiers('{otherDossierId}')/IncomingOrdersConfirmations": {
       "get": {
-        "summary": "Get OtherDossier's Orders Confirmations",
-        "description": "Get OtherDossier's Orders Confirmations",
-        "operationId": "GetOtherDossierOrdersConfirmations",
+        "summary": "Get OtherDossier's Incoming Orders Confirmations",
+        "description": "Get OtherDossier's Incoming Orders Confirmations",
+        "operationId": "GetOtherDossierIncomingOrdersConfirmations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/OutgoingOrdersConfirmations": {
+      "get": {
+        "summary": "Get OtherDossier's Outgoing Orders Confirmations",
+        "description": "Get OtherDossier's Outgoing Orders Confirmations",
+        "operationId": "GetOtherDossierOutgoingOrdersConfirmations",
         "parameters": [
           {
             "$ref": "#/parameters/otherDossierId"
@@ -4873,11 +4891,11 @@
         }
       }
     },
-    "/Purchases('{purchaseId}')/OrdersConfirmations": {
+    "/Purchases('{purchaseId}')/IncomingOrdersConfirmations": {
       "get": {
-        "summary": "Get Purchase's Orders Confirmations",
-        "description": "Get Purchase's Orders Confirmations",
-        "operationId": "GetPurchaseOrdersConfirmations",
+        "summary": "Get Purchase's Incoming Orders Confirmations",
+        "description": "Get Purchase's Incoming Orders Confirmations",
+        "operationId": "GetPurchaseIncomingOrdersConfirmations",
         "parameters": [
           {
             "$ref": "#/parameters/purchaseId"
@@ -5159,8 +5177,6 @@
         }
       }
     },
-
-
     "/Orders/$metadata": {
       "get": {
         "x-ms-visibility": "internal",
@@ -5933,11 +5949,11 @@
         }
       }
     },
-    "/Orders('{orderId}')/OrdersConfirmations": {
+    "/Orders('{orderId}')/OutgoingOrdersConfirmations": {
       "get": {
-        "summary": "Get Order's Orders Confirmations",
-        "description": "Get Order's Orders Confirmations",
-        "operationId": "GetOrderOrdersConfirmations",
+        "summary": "Get Order's Outgoing Orders Confirmations",
+        "description": "Get Order's Outgoing Orders Confirmations",
+        "operationId": "GetOrderOutgoingOrdersConfirmations",
         "parameters": [
           {
             "$ref": "#/parameters/orderId"
