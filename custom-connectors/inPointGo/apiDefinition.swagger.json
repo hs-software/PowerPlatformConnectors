@@ -205,6 +205,12 @@
                   "x-ms-summary": "Uid Nr.",
                   "x-ms-visibility": "advanced"
                 },
+                "CompanyIban": {
+                  "type": "string",
+                  "description": "Company IBAN",
+                  "x-ms-summary": "IBAN",
+                  "x-ms-visibility": "advanced"
+                },
                 "CompanyDomain": {
                   "type": "string",
                   "description": "Company Domain",
@@ -398,6 +404,12 @@
                   "x-ms-summary": "Uid Nr.",
                   "x-ms-visibility": "advanced"
                 },
+                "CompanyIban": {
+                  "type": "string",
+                  "description": "Company IBAN",
+                  "x-ms-summary": "IBAN",
+                  "x-ms-visibility": "advanced"
+                },
                 "CompanyDomain": {
                   "type": "string",
                   "description": "Company Domain",
@@ -587,6 +599,12 @@
                   "type": "string",
                   "description": "Company Uid Number",
                   "x-ms-summary": "Uid Nr.",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyIban": {
+                  "type": "string",
+                  "description": "Company IBAN",
+                  "x-ms-summary": "IBAN",
                   "x-ms-visibility": "advanced"
                 },
                 "CompanyDomain": {
