@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.5.1",
+    "version": "0.7.1",
     "title": "inPoint.Go API",
     "description": "inPoint.Go ODATA API connector for managing Dossiers",
     "contact": {
@@ -2824,7 +2824,7 @@
       "get": {
         "summary": "Get Contract's Messages",
         "description": "Get Contract's Messages",
-        "operationId": "GetContactMessages",
+        "operationId": "GetContractMessages",
         "parameters": [
           {
             "$ref": "#/parameters/contractId"
@@ -3779,11 +3779,29 @@
         }
       }
     },
-    "/OtherDossiers('{otherDossierId}')/Offers": {
+    "/OtherDossiers('{otherDossierId}')/OutgoingOffers": {
       "get": {
-        "summary": "Get OtherDossier's Offers",
-        "description": "Get OtherDossier's Offers",
-        "operationId": "GetOtherDossierOffers",
+        "summary": "Get OtherDossier's Outgoing Offers",
+        "description": "Get OtherDossier's Outgoing Offers",
+        "operationId": "GetOtherDossierOutgoingOffers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/otherDossierId"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/OtherDossiers('{otherDossierId}')/IncomingOffers": {
+      "get": {
+        "summary": "Get OtherDossier's Incoming Offers",
+        "description": "Get OtherDossier's Incoming Offers",
+        "operationId": "GetOtherDossierIncomingOffers",
         "parameters": [
           {
             "$ref": "#/parameters/otherDossierId"
@@ -4841,7 +4859,7 @@
       "get": {
         "summary": "Get Purchase's Messages",
         "description": "Get Purchase's Messages",
-        "operationId": "GetContactMessages",
+        "operationId": "GetPurchaseMessages",
         "parameters": [
           {
             "$ref": "#/parameters/purchaseId"
@@ -4855,11 +4873,11 @@
         }
       }
     },
-    "/Purchases('{purchaseId}')/Offers": {
+    "/Purchases('{purchaseId}')/IncomingOffers": {
       "get": {
-        "summary": "Get Purchase's Offers",
-        "description": "Get Purchase's Offers",
-        "operationId": "GetPurchaseOffers",
+        "summary": "Get Purchase's Incoming Offers",
+        "description": "Get Purchase's Incoming Offers",
+        "operationId": "GetPurchaseIncomingOffers",
         "parameters": [
           {
             "$ref": "#/parameters/purchaseId"
@@ -5899,7 +5917,7 @@
       "get": {
         "summary": "Get Order's Messages",
         "description": "Get Order's Messages",
-        "operationId": "GetContactMessages",
+        "operationId": "GetOrderMessages",
         "parameters": [
           {
             "$ref": "#/parameters/orderId"
@@ -5913,11 +5931,11 @@
         }
       }
     },
-    "/Orders('{orderId}')/Offers": {
+    "/Orders('{orderId}')/OutgoingOffers": {
       "get": {
-        "summary": "Get Order's Offers",
-        "description": "Get Order's Offers",
-        "operationId": "GetOrderOffers",
+        "summary": "Get Order's Outgoing Offers",
+        "description": "Get Order's Outgoing Offers",
+        "operationId": "GetOrderOutgoingOffers",
         "parameters": [
           {
             "$ref": "#/parameters/orderId"
