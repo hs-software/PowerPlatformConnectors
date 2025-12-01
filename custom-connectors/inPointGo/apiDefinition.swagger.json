@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.7.1",
+    "version": "0.8.1",
     "title": "inPoint.Go API",
     "description": "inPoint.Go ODATA API connector for managing Dossiers",
     "contact": {
@@ -211,6 +211,12 @@
                   "x-ms-summary": "IBAN",
                   "x-ms-visibility": "advanced"
                 },
+                "CompanyBic": {
+                  "type": "string",
+                  "description": "Company BIC/SWIFT",
+                  "x-ms-summary": "BIC",
+                  "x-ms-visibility": "advanced"
+                },
                 "CompanyDomain": {
                   "type": "string",
                   "description": "Company Domain",
@@ -410,6 +416,12 @@
                   "x-ms-summary": "IBAN",
                   "x-ms-visibility": "advanced"
                 },
+                "CompanyBic": {
+                  "type": "string",
+                  "description": "Company BIC/SWIFT",
+                  "x-ms-summary": "BIC",
+                  "x-ms-visibility": "advanced"
+                },
                 "CompanyDomain": {
                   "type": "string",
                   "description": "Company Domain",
@@ -605,6 +617,12 @@
                   "type": "string",
                   "description": "Company IBAN",
                   "x-ms-summary": "IBAN",
+                  "x-ms-visibility": "advanced"
+                },
+                "CompanyBic": {
+                  "type": "string",
+                  "description": "Company BIC/SWIFT",
+                  "x-ms-summary": "BIC",
                   "x-ms-visibility": "advanced"
                 },
                 "CompanyDomain": {
